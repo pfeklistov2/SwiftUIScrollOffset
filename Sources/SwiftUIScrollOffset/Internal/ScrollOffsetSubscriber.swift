@@ -5,7 +5,8 @@
 */
 
 import SwiftUI
-import SwiftUIIntrospect
+//import SwiftUIIntrospect
+@_spi(Advanced) import SwiftUIIntrospect
 
 @MainActor
 internal struct ScrollOffsetSubscriber: ViewModifier {
@@ -64,7 +65,7 @@ private struct ScrollOffsetIntrospectionModifier: ViewModifier {
     #else
     func body(content: Content) -> some View {
         content
-            .introspect(.scrollView, on: .iOS(.v14, .v15, .v16, .v17)) { scrollView in
+            .introspect(.scrollView, on: .iOS(.v14...)) { scrollView in
                 ScrollSubscriptionStore.shared.subscribe(id: id, scrollView: scrollView)
             }
     }
